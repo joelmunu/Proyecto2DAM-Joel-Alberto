@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         justifyContent: "flex-start",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "#EDEBEB"
     },
     dataContainer: {
         backgroundColor: 'rgba(212, 212, 212, 0.6)',
