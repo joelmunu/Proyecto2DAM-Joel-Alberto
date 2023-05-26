@@ -26,8 +26,8 @@ public class Routine {
     private String title;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "rutine_exercise",
-            joinColumns = @JoinColumn(name = "rutine_id"),
+    @JoinTable(name = "routine_exercise",
+            joinColumns = @JoinColumn(name = "routine_id"),
             inverseJoinColumns = @JoinColumn(name = "exercise_id"))
     private Set<Exercise> exercises = new HashSet<>();
 
@@ -54,8 +54,16 @@ public class Routine {
         this.title = title;
     }
 
+    public Set<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(Set<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
     @Override
     public String toString() {
-        return "Routine [routine_id=" + routine_id + ", title=" + title + "]";
+        return "Routine [routine_id=" + routine_id + ", title=" + title + ", exercises=" + exercises + "]";
     }
 }
