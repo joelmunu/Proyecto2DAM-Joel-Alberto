@@ -6,17 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.server.entities.User;
 import com.proyecto.server.entities.DTO.UserDTO;
 import com.proyecto.server.repository.UserRepository;
+import com.proyecto.server.services.UserService;
+
+import org.mindrot.jbcrypt.*;
 
 @RestController
 public class UserController {
     
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable int id) {
@@ -34,5 +42,11 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    
+    @PostMapping("/registeruser")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        String encryptedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(encryptedPassword);
+        userService.save(user);
+        return ResponseEntity.ok().build();
+    }
 }
