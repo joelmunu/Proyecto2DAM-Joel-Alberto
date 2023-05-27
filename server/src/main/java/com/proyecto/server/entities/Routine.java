@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,11 +26,11 @@ public class Routine {
     @Column(length = 50)
     private String title;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "routine_exercise",
-            joinColumns = @JoinColumn(name = "routine_id"),
-            inverseJoinColumns = @JoinColumn(name = "exercise_id"))
-    private Set<Exercise> exercises = new HashSet<>();
+            joinColumns = @JoinColumn(name = "fk_routine_id"),
+            inverseJoinColumns = @JoinColumn(name = "fk_exercise_id"))
+    private Set<Exercise> exercise = new HashSet<>();
 
     public Routine() {
     }
@@ -55,15 +56,15 @@ public class Routine {
     }
 
     public Set<Exercise> getExercises() {
-        return exercises;
+        return exercise;
     }
 
     public void setExercises(Set<Exercise> exercises) {
-        this.exercises = exercises;
+        this.exercise = exercises;
     }
 
     @Override
     public String toString() {
-        return "Routine [routine_id=" + routine_id + ", title=" + title + ", exercises=" + exercises + "]";
+        return "Routine [routine_id=" + routine_id + ", title=" + title + ", exercises=" + exercise + "]";
     }
 }

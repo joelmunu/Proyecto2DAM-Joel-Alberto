@@ -1,16 +1,26 @@
 package com.proyecto.server.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "exercise")
 public class Exercise {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int exercise_id;
@@ -20,6 +30,14 @@ public class Exercise {
 
     @Column(length = 50)
     private String video_id;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    }, mappedBy = "exercise")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Set<Routine> routine = new HashSet<Routine>();
 
     public Exercise() {
     }
@@ -53,8 +71,18 @@ public class Exercise {
         this.video_id = video_id;
     }
 
+    
+
     @Override
     public String toString() {
         return "Exercise [exercise_id=" + exercise_id + ", name=" + name + ", video_id=" + video_id + "]";
+    }
+
+    public Set<Routine> getRoutine() {
+        return routine;
+    }
+
+    public void setRoutine(Set<Routine> routine) {
+        this.routine = routine;
     }
 }
