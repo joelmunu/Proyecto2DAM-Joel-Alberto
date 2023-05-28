@@ -23,10 +23,6 @@ export default function LoginScreen() {
                     <View style={styles.centerButton}>
                         <YellowButton />
                     </View>
-                    <View style={styles.forgotPassword}>
-                        <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-                        <Text style={styles.forgotPasswordLink}>Reset your password</Text>
-                    </View>
                 </View>
             </View>
         </ImageBackground>
