@@ -1,7 +1,18 @@
 import { StyleSheet, Text, View, ImageBackground, Pressable } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 export default function WelcomeScreen() {
+
+    const navigation = useNavigation();
+
+    const registerScreen = () => {
+        navigation.navigate('Register')
+    }
+
+    const loginScreen = () => {
+        navigation.navigate('Login')
+    }
+
     return (
         <ImageBackground source={require('../assets/welcome.jpg')} resizeMode="cover" style={styles.image}>
             <View style={styles.welcome}>
@@ -10,10 +21,10 @@ export default function WelcomeScreen() {
             </View>
 
             <View style={styles.getStarted}>
-                <Pressable style={styles.started}>
+                <Pressable style={styles.started} onPress={registerScreen}>
                     <Text style={styles.startedText}>Get started</Text>
                 </Pressable>
-                <Text style={styles.logInText}>Already have an account? <Text style={styles.logInTextLink}>Log In</Text></Text>
+                <Text style={styles.logInText}>Already have an account? <Text style={styles.logInTextLink} onPress={loginScreen}>Log In</Text></Text>
             </View>
         </ImageBackground>
     )
