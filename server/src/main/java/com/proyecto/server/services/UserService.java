@@ -15,4 +15,11 @@ public class UserService {
     public void save(User user) {
         userRepository.save(user);
     }
+
+    public String findPasswordByUsername(String username) {
+        String pass = userRepository.findPasswordByUsername(username);
+        System.out.println(pass);
+        return pass;
+
+    }
 }
