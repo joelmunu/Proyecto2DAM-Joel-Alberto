@@ -4,7 +4,7 @@ import YellowButton from './common/YellowButton';
 import { useState } from 'react';
 
 
-export default function LoginScreen() {
+export default function LoginScreen({setFirstLogin}) {
     const [formData, setFormData] = useState({
         "username": "",
         "password": "",
@@ -26,7 +26,7 @@ export default function LoginScreen() {
         ) {
             alert('All fields are required')
         } else {
-            const url = 'http://192.168.0.27:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
+            const url = 'http://192.168.0.20:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
             fetch(url, {
                 method: 'POST',
@@ -37,7 +37,7 @@ export default function LoginScreen() {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Ha iniciado sesión")
+                        setFirstLogin(false)
                         return response.json();
                     } else {
                         alert("Error al inciar sesion")

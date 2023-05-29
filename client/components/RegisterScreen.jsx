@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View, ImageBackground, TextInput, Button } from 'react-native';
 
-import YellowButton from './common/YellowButton';
+
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function RegisterScreen() {
+export default function RegisterScreen({setFirstLogin}) {
     const [formData, setFormData] = useState({
         "username": "",
         "fullname": "",
@@ -20,6 +21,10 @@ export default function RegisterScreen() {
         "pr_benchPress": 0,
         "pr_deadLift": 0
     })
+
+    // const navigation = useNavigation();
+
+    
 
     const handleInputChange = (fieldName, value) => {
         setFormData(prevState => ({
@@ -50,7 +55,7 @@ export default function RegisterScreen() {
         ) {
             alert('All fields are required')
         } else {
-            const url = 'http://192.168.0.27:8080/registeruser'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
+            const url = 'http://192.168.0.20:8080/registeruser'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
             fetch(url, {
                 method: 'POST',
@@ -61,7 +66,7 @@ export default function RegisterScreen() {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Se ha registrado")
+                        setFirstLogin(false)
                         return response.json();
                     } else {
                         throw new Error('Error en la solicitud');
