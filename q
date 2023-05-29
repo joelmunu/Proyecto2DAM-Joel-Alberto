@@ -1,0 +1,188 @@
+[33mcommit a4f3af5adb9faff4cec61975c66e777b66a2a00a[m[33m ([m[1;36mHEAD -> [m[1;32mPlansScreen[m[33m, [m[1;31morigin/RecipesScreen[m[33m, [m[1;32mdevelopment[m[33m, [m[1;32mRecipesScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Mon May 29 18:44:27 2023 +0200
+
+    Added design screen recipes
+
+[33mcommit 0d53405a7f61f39326fd92b48838c7a215ece0d1[m[33m ([m[1;31morigin/RoutinesScreen[m[33m, [m[1;32mRoutinesScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Mon May 29 18:37:59 2023 +0200
+
+    Added design screen routines
+
+[33mcommit b31516b72a6e3f2d8f4ab41c74ea8bb2cd9446e5[m[33m ([m[1;31morigin/HomeScreen[m[33m, [m[1;32mHomeScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Mon May 29 17:31:36 2023 +0200
+
+    Added home design
+
+[33mcommit 453ac04d7d6c6fc6e3393c076cbefc37548f760c[m[33m ([m[1;31morigin/Navigation[m[33m, [m[1;32mNavigation[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Mon May 29 15:17:15 2023 +0200
+
+    Added navigation when authenticating
+
+[33mcommit 319d567c00ef40194ed2a8f770460697ca8512ce[m[33m ([m[1;31morigin/development[m[33m, [m[1;31morigin/LoginScreen[m[33m, [m[1;32mLoginScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Mon May 29 00:02:17 2023 +0200
+
+    Added login funcionality
+
+[33mcommit 87470f9c300658fe686c11e50277ba7dcb55b76a[m[33m ([m[1;31morigin/RegisterScreen[m[33m, [m[1;32mRegisterScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Sun May 28 23:39:59 2023 +0200
+
+    Added register funcionality
+
+[33mcommit f4605b7a5c2388bbc17f7b0c9f9e6455074176a4[m
+Merge: d9f8a84 f04bf4e
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Sun May 28 15:25:41 2023 +0200
+
+    Merge branch 'Navigation' into development
+
+[33mcommit f04bf4e3effeff39ed5b2e7745ce83fd802b9abc[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Sun May 28 15:25:08 2023 +0200
+
+    Added first start navigation
+
+[33mcommit d9f8a842a75f46d1eca307d4443560640eff22e5[m[33m ([m[1;31morigin/UserData[m[33m)[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Sun May 28 10:54:40 2023 +0100
+
+    Login controller added
+
+[33mcommit eaa4a9d904e2212356c41dd56fa975c039992e40[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Sat May 27 18:22:44 2023 +0100
+
+    Add to controller the register user method
+
+[33mcommit 241ce95ed6e237142e29e757f42b36f09a566626[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Sat May 27 18:09:29 2023 +0100
+
+    Add to controller the find user by id method
+
+[33mcommit 552079147da43fdbe26fdea03deee162b640965d[m[33m ([m[1;31morigin/Entities[m[33m)[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Sat May 27 17:29:50 2023 +0100
+
+    Changes in the relational table routine_exercise
+
+[33mcommit 1e02a50d99ba6312ad56ce4427ee970fdf8e9cf3[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 12:33:18 2023 +0100
+
+    Added user sample data
+
+[33mcommit e5e29cefaf016ea87f16a057905be6084fcca7c5[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 12:21:54 2023 +0100
+
+    Method save added to all services
+
+[33mcommit 1ad129295884cccbc1516a5b6fc81424f4076d75[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 12:13:40 2023 +0100
+
+    Created repositories and services
+
+[33mcommit 3af10cf9235334aa4dda96f900bb855d6cf80814[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 11:57:18 2023 +0100
+
+    UserPlan table added
+
+[33mcommit e3117e68218260ad4adf526ef9b2948647ac0252[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 11:37:19 2023 +0100
+
+    Recipe table created
+
+[33mcommit 074597241ca237483b67b39758992dd4731a0a9b[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 11:33:42 2023 +0100
+
+    Added a relational table between Routine and Exercise tables
+
+[33mcommit 7214f0af5ba644f8da6e25f86af35a1531a905d2[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 11:16:43 2023 +0100
+
+    Exercise table created
+
+[33mcommit 196b7780f3aae605f6b87cf360f641dc6774ce7c[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 11:12:03 2023 +0100
+
+    Routine table created
+
+[33mcommit 68aa05611f5f0b86840f679f265b5477e00becab[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 11:05:20 2023 +0100
+
+    User table created
+
+[33mcommit 9b14f02ef2561bbe51c095bf94ecdba44479b463[m[33m ([m[1;31morigin/DBCreation[m[33m)[m
+Author: Joel Munuera Marrero <joel.munu@gmail.com>
+Date:   Fri May 26 10:43:46 2023 +0100
+
+    Added DB configuration file
+
+[33mcommit eda5a70366bbca43009655f420a86599a46b7d88[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Fri May 26 11:21:22 2023 +0200
+
+    Spring version changed
+
+[33mcommit 9876062cafb58a57ebac8e35d8fdb04ad7a64810[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Wed May 24 15:51:04 2023 +0200
+
+    Added navigation
+
+[33mcommit 0fc08ea5b61bee0c6c6642903e57d468c07c2d82[m[33m ([m[1;31morigin/ProfileScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Wed May 24 14:58:18 2023 +0200
+
+    Added the first profile screen design
+
+[33mcommit 222588694c815f1a5d8c2a8548e10d374590810c[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Wed May 24 11:36:54 2023 +0200
+
+    Added the first design of the registration screen
+
+[33mcommit 4276de7d34bdf614b0ae2600864768d40bf9de7a[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Wed May 24 11:04:21 2023 +0200
+
+    Add first LoginScreen design
+
+[33mcommit ef4f1b53018fd85b0097072407b4be8ff2fcf71e[m[33m ([m[1;31morigin/WelcomeScreen[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Tue May 23 19:50:34 2023 +0200
+
+    Añadido primer diseño de la pantalla de bienvenida
+    
+    "Added first WelcomeScreen Desing"
+
+[33mcommit 393feba22c642bc7e13decb58002c0379610e443[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Wed Mar 8 21:43:44 2023 +0000
+
+    Added the welcome screen
+
+[33mcommit b36aa40fde72bdbdc7ebf7f31a4ba033a5e7ae76[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Tue Mar 7 09:24:35 2023 +0000
+
+    Add README.md file
+
+[33mcommit 96ef5016912f2df4c8453b6264a75788d3394c82[m
+Author: Alberto <albertovalidofuentes2001@gmail.com>
+Date:   Tue Mar 7 09:04:50 2023 +0000
+
+    Initial commit
