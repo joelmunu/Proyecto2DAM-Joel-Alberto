@@ -26,6 +26,9 @@ public class Routine {
     @Column(length = 50)
     private String title;
 
+    @Column(length = 40)
+    private String routine_type;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "routine_exercise",
             joinColumns = @JoinColumn(name = "fk_routine_id"),
@@ -35,8 +38,9 @@ public class Routine {
     public Routine() {
     }
 
-    public Routine(String title) {
+    public Routine(String title, String routine_type) {
         this.title = title;
+        this.routine_type = routine_type;
     }
 
     public int getRoutine_id() {
@@ -53,6 +57,14 @@ public class Routine {
 
     public void setTitle(String title) {
         this.title = title;
+    }  
+
+    public String getRoutine_type() {
+        return routine_type;
+    }
+
+    public void setRoutine_type(String routine_type) {
+        this.routine_type = routine_type;
     }
 
     public Set<Exercise> getExercises() {
@@ -65,6 +77,7 @@ public class Routine {
 
     @Override
     public String toString() {
-        return "Routine [routine_id=" + routine_id + ", title=" + title + ", exercises=" + exercise + "]";
+        return "Routine [routine_id=" + routine_id + ", title=" + title + ", routine_type=" + routine_type
+                + ", exercise=" + exercise + "]";
     }
 }
