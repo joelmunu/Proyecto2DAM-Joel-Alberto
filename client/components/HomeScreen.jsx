@@ -28,7 +28,7 @@ export default function HomeScreen() {
                         </View>
                         <View style={styles.categoryCardTextContainer}>
                             <Text style={styles.categoryCardTextTitle}>Fitness</Text>
-                            <Text style={styles.categoryCardText}>Rutines</Text>
+                            <Text style={styles.categoryCardText}>Routines</Text>
                         </View>
                     </View>
                     <View>
@@ -37,7 +37,7 @@ export default function HomeScreen() {
                         </View>
                         <View style={styles.categoryCardTextContainer}>
                             <Text style={styles.categoryCardTextTitle}>Fitness</Text>
-                            <Text style={styles.categoryCardText}>Rutines</Text>
+                            <Text style={styles.categoryCardText}>Routines</Text>
                         </View>
                     </View>
                     <View style={styles.categoryCardLast}>
@@ -46,7 +46,7 @@ export default function HomeScreen() {
                         </View>
                         <View style={styles.categoryCardTextContainer}>
                             <Text style={styles.categoryCardTextTitle}>Fitness</Text>
-                            <Text style={styles.categoryCardText}>Rutines</Text>
+                            <Text style={styles.categoryCardText}>Routines</Text>
                         </View>
                     </View>
                 </ScrollView>
@@ -60,7 +60,7 @@ export default function HomeScreen() {
                         </View>
                         <View style={styles.categoryCardTextContainer}>
                             <Text style={styles.categoryCardTextTitle}>Fitness</Text>
-                            <Text style={styles.categoryCardText}>Rutines</Text>
+                            <Text style={styles.categoryCardText}>Routines</Text>
                         </View>
                     </View>
                     <View>
@@ -69,7 +69,7 @@ export default function HomeScreen() {
                         </View>
                         <View style={styles.categoryCardTextContainer}>
                             <Text style={styles.categoryCardTextTitle}>Fitness</Text>
-                            <Text style={styles.categoryCardText}>Rutines</Text>
+                            <Text style={styles.categoryCardText}>Routines</Text>
                         </View>
                     </View>
                     <View style={styles.categoryCardLast}>
@@ -78,7 +78,7 @@ export default function HomeScreen() {
                         </View>
                         <View style={styles.categoryCardTextContainer}>
                             <Text style={styles.categoryCardTextTitle}>Fitness</Text>
-                            <Text style={styles.categoryCardText}>Rutines</Text>
+                            <Text style={styles.categoryCardText}>Routines</Text>
                         </View>
                     </View>
                 </ScrollView>
