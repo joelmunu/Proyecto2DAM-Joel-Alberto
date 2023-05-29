@@ -70,7 +70,6 @@ export default function RoutinesScreen() {
             </View>
         </View>
 
-
     )
 }
 
