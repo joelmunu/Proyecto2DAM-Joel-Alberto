@@ -31,10 +31,9 @@ public class InitDatabase implements CommandLineRunner{
         User user = new User("Goyo", "Poyo", 1.70f, 89.0f, 45, "male", "1234", 122, 122, 122);
         userService.save(user);
 
-        // añadir rutina y comprobar que se añade en la tabla relacional
         Routine routine = new Routine("Biceps and Triceps", "Upper body");
-        Exercise exercise = new Exercise("dsad", "dsd");
-        Exercise exercise2 = new Exercise("dfsd", "fsdf");
+        Exercise exercise = new Exercise("Curl Biceps", "Curl biceps description");
+        Exercise exercise2 = new Exercise("Bench press", "Bench press description");
 
         Set<Exercise> exercises = new HashSet<>();
         exercises.add(exercise);

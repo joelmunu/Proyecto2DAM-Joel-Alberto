@@ -28,8 +28,8 @@ public class Exercise {
     @Column(length = 50)
     private String name;
 
-    @Column(length = 50)
-    private String video_id;
+    @Column
+    private String description;
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -42,9 +42,9 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(String name, String video_id) {
+    public Exercise(String name, String description) {
         this.name = name;
-        this.video_id = video_id;
+        this.description = description;
     }
 
     public int getExercise_id() {
@@ -63,19 +63,12 @@ public class Exercise {
         this.name = name;
     }
 
-    public String getVideo_id() {
-        return video_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVideo_id(String video_id) {
-        this.video_id = video_id;
-    }
-
-    
-
-    @Override
-    public String toString() {
-        return "Exercise [exercise_id=" + exercise_id + ", name=" + name + ", video_id=" + video_id + "]";
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Routine> getRoutine() {
@@ -84,5 +77,11 @@ public class Exercise {
 
     public void setRoutine(Set<Routine> routine) {
         this.routine = routine;
+    }
+
+    @Override
+    public String toString() {
+        return "Exercise [exercise_id=" + exercise_id + ", name=" + name + ", description=" + description + ", routine="
+                + routine + "]";
     }
 }
