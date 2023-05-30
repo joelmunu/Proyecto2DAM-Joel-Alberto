@@ -20,6 +20,9 @@ public class UserService {
         String pass = userRepository.findPasswordByUsername(username);
         System.out.println(pass);
         return pass;
+    }
 
+    public Integer checkUsername(String username) {
+        return userRepository.checkUsername(username);
     }
 }

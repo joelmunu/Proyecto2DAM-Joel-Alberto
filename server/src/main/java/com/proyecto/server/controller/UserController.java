@@ -69,6 +69,11 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User or password is incorrect");
         }
-        
+    }
+
+    @GetMapping("/checkusername/{username}")
+    public ResponseEntity<Integer> checkUsername(@PathVariable String username) {
+        Integer usernameCount = userService.checkUsername(username);
+        return new ResponseEntity<>(usernameCount, HttpStatus.OK);
     }
 }

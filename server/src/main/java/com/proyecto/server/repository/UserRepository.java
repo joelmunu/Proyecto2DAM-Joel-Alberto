@@ -9,4 +9,7 @@ public interface UserRepository extends JpaRepository <User, Integer>{
     
     @Query(value = "SELECT PASSWORD FROM fitnessapp.user WHERE username = ?", nativeQuery = true)
     String findPasswordByUsername(String username);
+
+    @Query(value = "SELECT COUNT(*) FROM user where username = ?", nativeQuery = true)
+    Integer checkUsername(String username);
 }
