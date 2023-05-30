@@ -1,6 +1,5 @@
 package com.proyecto.server.controller;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyecto.server.entities.Exercise;
 import com.proyecto.server.entities.Routine;
 import com.proyecto.server.request.CreateRoutineRequest;
 import com.proyecto.server.services.RoutineService;

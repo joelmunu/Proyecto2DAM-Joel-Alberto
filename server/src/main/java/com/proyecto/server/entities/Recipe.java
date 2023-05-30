@@ -86,13 +86,13 @@ public class Recipe {
         this.user = user;
     }
 
-    public Set<UserPlan> getUserPlans() {
-        return userPlans;
-    }
+    // public Set<UserPlan> getUserPlans() {
+    //     return userPlans;
+    // }
 
-    public void setUserPlans(Set<UserPlan> userPlans) {
-        this.userPlans = userPlans;
-    }
+    // public void setUserPlans(Set<UserPlan> userPlans) {
+    //     this.userPlans = userPlans;
+    // }
 
     @Override
     public String toString() {
