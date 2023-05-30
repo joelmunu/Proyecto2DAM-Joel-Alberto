@@ -12,4 +12,7 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Integer>{
     
     @Query(value = "SELECT * FROM exercise", nativeQuery = true)
     Set<Exercise> getExercises();
+
+    @Query(value = "SELECT * FROM fitnessapp.exercise WHERE name = ?", nativeQuery = true)
+    Exercise findExerciseByName(String name);
 }

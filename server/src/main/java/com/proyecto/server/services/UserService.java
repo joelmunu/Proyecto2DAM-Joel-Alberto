@@ -25,4 +25,8 @@ public class UserService {
     public Integer checkUsername(String username) {
         return userRepository.checkUsername(username);
     }
+
+    public User findUserById(int id) {
+        return userRepository.findUserById(id);
+    }
 }

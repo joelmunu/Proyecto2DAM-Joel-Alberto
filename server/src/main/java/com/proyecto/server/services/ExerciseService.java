@@ -21,4 +21,8 @@ public class ExerciseService {
     public Set<Exercise> getExercises() {
         return exerciseRepository.getExercises();
     }
+
+    public Exercise findExerciseByName(String name) {
+        return exerciseRepository.findExerciseByName(name);
+    }
 }
