@@ -3,7 +3,6 @@ package com.proyecto.server.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,38 +20,44 @@ public class UserPlan {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userPlan_id;
+    private int user_plan_id;
 
     @Column(length = 50)
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "userPlan_routine",
-            joinColumns = @JoinColumn(name = "userPlan_id"),
-            inverseJoinColumns = @JoinColumn(name = "routine_id"))
+    @ManyToMany
+    @JoinTable(
+        name = "user_plan_routine",
+        joinColumns = @JoinColumn(name = "user_plan_id"),
+        inverseJoinColumns = @JoinColumn(name = "routine_id")
+    )
     private Set<Routine> routines = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "userPlan_recipe",
-            joinColumns = @JoinColumn(name = "userPlan_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    @ManyToMany
+    @JoinTable(
+        name = "user_plan_recipe",
+        joinColumns = @JoinColumn(name = "user_plan_id"),
+        inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
     private Set<Recipe> recipes = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public UserPlan() {
     }
 
-    public UserPlan(String name, Set<Routine> routines, Set<Recipe> recipes) {
+    public UserPlan(String name) {
         this.name = name;
-        this.routines = routines;
-        this.recipes = recipes;
     }
 
-    public int getUserPlan_id() {
-        return userPlan_id;
+    public int getUser_plan_id() {
+        return user_plan_id;
     }
 
-    public void setUserPlan_id(int userPlan_id) {
-        this.userPlan_id = userPlan_id;
+    public void setUser_plan_id(int userPlan_id) {
+        this.user_plan_id = userPlan_id;
     }
 
     public String getName() {
@@ -78,9 +84,17 @@ public class UserPlan {
         this.recipes = recipes;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
-        return "UserPlan [userPlan_id=" + userPlan_id + ", name=" + name + ", routines=" + routines + ", recipes="
+        return "UserPlan [userPlan_id=" + user_plan_id + ", name=" + name + ", routines=" + routines + ", recipes="
                 + recipes + "]";
     }
 }

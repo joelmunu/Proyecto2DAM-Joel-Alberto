@@ -16,6 +16,7 @@ import com.proyecto.server.entities.UserPlan;
 import com.proyecto.server.services.ExerciseService;
 import com.proyecto.server.services.RecipeService;
 import com.proyecto.server.services.RoutineService;
+import com.proyecto.server.services.UserPlanService;
 import com.proyecto.server.services.UserService;
 
 @Component
@@ -33,6 +34,9 @@ public class InitDatabase implements CommandLineRunner{
     @Autowired
     RecipeService recipeService;
 
+    @Autowired
+    UserPlanService userPlanService;
+
     @Override
     public void run(String... args) throws Exception {
         User user = new User("Goyo", "Poyo", 1.70f, 89.0f, 45, "male", "1234", 122, 122, 122);
@@ -49,6 +53,8 @@ public class InitDatabase implements CommandLineRunner{
         //Exercise run = new Exercise("500m run", "500m run");
 
         Recipe bananaSmoothie = new Recipe("Banana Smoothie", "Banana smoothie recipe", "1 Banana, 1/2 orange, 300ml milk");
+
+        UserPlan plan1 = new UserPlan("Plan 1");
 
         Set<Exercise> exercises = new HashSet<>();
         exercises.add(curlBiceps);
@@ -69,5 +75,15 @@ public class InitDatabase implements CommandLineRunner{
         bananaSmoothie.setUser(user);
         recipeService.save(bananaSmoothie);
 
+        Set<Recipe> recipes = new HashSet<>();
+        recipes.add(bananaSmoothie);
+
+        Set<Routine> routines = new HashSet<>();
+        routines.add(legDay);
+
+        plan1.setRecipes(recipes);
+        plan1.setRoutines(routines);
+        plan1.setUser(user);
+        userPlanService.save(plan1);
     }
 }

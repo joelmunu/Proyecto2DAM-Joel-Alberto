@@ -1,11 +1,15 @@
 package com.proyecto.server.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,6 +33,9 @@ public class Recipe {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany(mappedBy = "recipes")
+    private Set<UserPlan> userPlans = new HashSet<>();
 
     public Recipe() {
     }
@@ -77,6 +84,14 @@ public class Recipe {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<UserPlan> getUserPlans() {
+        return userPlans;
+    }
+
+    public void setUserPlans(Set<UserPlan> userPlans) {
+        this.userPlans = userPlans;
     }
 
     @Override
