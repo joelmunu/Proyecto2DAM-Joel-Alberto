@@ -8,10 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.proyecto.server.entities.Exercise;
+import com.proyecto.server.entities.Recipe;
 //import com.proyecto.server.entities.Recipe;
 import com.proyecto.server.entities.Routine;
 import com.proyecto.server.entities.User;
+import com.proyecto.server.entities.UserPlan;
 import com.proyecto.server.services.ExerciseService;
+import com.proyecto.server.services.RecipeService;
 import com.proyecto.server.services.RoutineService;
 import com.proyecto.server.services.UserService;
 
@@ -26,6 +29,9 @@ public class InitDatabase implements CommandLineRunner{
 
     @Autowired
     ExerciseService exerciseService;
+
+    @Autowired
+    RecipeService recipeService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,8 +48,7 @@ public class InitDatabase implements CommandLineRunner{
         Exercise airBike = new Exercise("Air Bike 25 cal", "Air Bike 25 cal");
         //Exercise run = new Exercise("500m run", "500m run");
 
-        //Recipe bananaSmoothie = new Recipe("Banana Smoothie", "Banana smoothie recipe", "1 Banana, 1/2 orange, 300ml milk");
-
+        Recipe bananaSmoothie = new Recipe("Banana Smoothie", "Banana smoothie recipe", "1 Banana, 1/2 orange, 300ml milk");
 
         Set<Exercise> exercises = new HashSet<>();
         exercises.add(curlBiceps);
@@ -60,5 +65,9 @@ public class InitDatabase implements CommandLineRunner{
         legDay.setUser(user);
 
         routineService.save(legDay);
+        
+        bananaSmoothie.setUser(user);
+        recipeService.save(bananaSmoothie);
+
     }
 }
