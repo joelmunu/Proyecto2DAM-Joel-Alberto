@@ -11,4 +11,7 @@ public interface RecipeRepository extends JpaRepository <Recipe, Integer>{
 
     @Query(value = "SELECT * FROM recipe WHERE user_id = ?", nativeQuery = true)
     Set<Recipe> findRecipesByUserId(int id);
+
+    @Query(value = "SELECT * FROM fitnessapp.recipe WHERE name = ? LIMIT 1", nativeQuery = true)
+    Recipe findRecipeByName(String name);
 }

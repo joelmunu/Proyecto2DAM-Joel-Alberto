@@ -51,4 +51,8 @@ public class RoutineService {
             return null;
         }
     }
+
+    public Routine findRoutineByName(String title) {
+        return routineRepository.findRoutineByName(title);
+    }
 }

@@ -34,4 +34,8 @@ public class RecipeService {
         
         return recipe;
     }
+
+    public Recipe findRecipeByName(String name) {
+        return recipeRepository.findRecipeByName(name);
+    }
 }
