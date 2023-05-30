@@ -42,4 +42,8 @@ public class RecipeService {
     public int deleteRecipeById(int id) {
         return recipeRepository.deleteRecipeById(id);
     }
+
+    public Set<Recipe> getAllRecipes() {
+        return recipeRepository.getAllRecipes();
+    }
 }

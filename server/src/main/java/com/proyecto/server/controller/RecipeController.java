@@ -22,6 +22,12 @@ public class RecipeController {
     @Autowired
     RecipeService recipeService;
 
+    @GetMapping("/recipes")
+    public ResponseEntity<Set<Recipe>> getAllRecipes() {
+        Set<Recipe> recipes = recipeService.getAllRecipes();
+        return new ResponseEntity<Set<Recipe>>(recipes, HttpStatus.OK);
+    }
+
     @GetMapping("/recipes/{id}")
     public ResponseEntity<Set<Recipe>> findRecipeByUserId(@PathVariable int id) {
         Set<Recipe> recipes = recipeService.findRecipeByUserId(id);

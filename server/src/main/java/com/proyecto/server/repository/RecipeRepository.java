@@ -21,4 +21,7 @@ public interface RecipeRepository extends JpaRepository <Recipe, Integer>{
     @Modifying
     @Query(value = "DELETE FROM recipe WHERE recipe_id = ?", nativeQuery = true)
     int deleteRecipeById(int id);
+
+    @Query(value = "SELECT * FROM recipe", nativeQuery = true)
+    Set<Recipe> getAllRecipes();
 }
