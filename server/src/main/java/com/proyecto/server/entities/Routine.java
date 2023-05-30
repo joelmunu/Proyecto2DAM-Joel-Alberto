@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +35,10 @@ public class Routine {
             joinColumns = @JoinColumn(name = "fk_routine_id"),
             inverseJoinColumns = @JoinColumn(name = "fk_exercise_id"))
     private Set<Exercise> exercise = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Routine() {
     }
@@ -73,6 +78,22 @@ public class Routine {
 
     public void setExercises(Set<Exercise> exercises) {
         this.exercise = exercises;
+    }
+
+    public Set<Exercise> getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Set<Exercise> exercise) {
+        this.exercise = exercise;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

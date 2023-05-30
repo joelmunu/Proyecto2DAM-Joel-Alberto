@@ -44,6 +44,7 @@ public class InitDatabase implements CommandLineRunner{
 
         //Recipe bananaSmoothie = new Recipe("Banana Smoothie", "Banana smoothie recipe", "1 Banana, 1/2 orange, 300ml milk");
 
+
         Set<Exercise> exercises = new HashSet<>();
         exercises.add(curlBiceps);
         exercises.add(benchPress);
@@ -55,6 +56,8 @@ public class InitDatabase implements CommandLineRunner{
         exercises.add(backSquat);
         exercises.add(airBike);
         legDay.setExercises(exercises);
+
+        legDay.setUser(user);
 
         routineService.save(legDay);
     }
