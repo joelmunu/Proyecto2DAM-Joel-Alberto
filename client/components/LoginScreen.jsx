@@ -1,15 +1,17 @@
-import { StyleSheet, Text, View, ImageBackground, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, Pressable } from 'react-native';
 
 import YellowButton from './common/YellowButton';
 import { useState } from 'react';
 
 
-export default function LoginScreen() {
+export default function LoginScreen({ setFirstLogin }) {
     const [formData, setFormData] = useState({
         "username": "",
         "password": "",
 
     })
+    const [error, setError] = useState(false)
+    const [errorText, setErrorText] = useState("")
 
     const handleInputChange = (fieldName, value) => {
         setFormData(prevState => ({
@@ -24,7 +26,8 @@ export default function LoginScreen() {
             formData.username === '' ||
             formData.password === ''
         ) {
-            alert('All fields are required')
+            setError(true)
+            setErrorText('All fields are required')
         } else {
             const url = 'http://192.168.0.27:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
@@ -37,10 +40,11 @@ export default function LoginScreen() {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Ha iniciado sesión")
+                        setFirstLogin(false)
                         return response.json();
                     } else {
-                        alert("Error al inciar sesion")
+                        setError(true)
+                        setErrorText('Wrong username or password')
                         throw new Error('Error en la solicitud');
                     }
                 })
@@ -68,9 +72,15 @@ export default function LoginScreen() {
                         />
                     </View>
                     <View style={styles.centerButton}>
-                        <Button title='Login' style={styles.button} onPress={login}>
-                        </Button>
+                        <Pressable style={styles.button} onPress={login}>
+                            <Text style={styles.textButton}>Log in</Text>
+                        </Pressable>
                     </View>
+                    {error && (
+                        <View style={styles.error}>
+                            <Text style={styles.errorText}>{errorText}</Text>
+                        </View>
+                    )}
                 </View>
             </View>
         </ImageBackground>
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 2,
         borderColor: "#39393B",
-        
+
     },
     loginForm: {
         padding: 40,
@@ -145,4 +155,20 @@ const styles = StyleSheet.create({
     centerButton: {
         alignItems: "center"
     },
+    textButton: {
+        color: "#EDEBEB",
+        fontSize: 20
+    },
+    error: {
+        alignItems: "center",
+        marginTop: 20,
+        backgroundColor: "#FF4A41",
+        padding: 20,
+        borderRadius: 20
+
+    },
+    errorText: {
+        color: "#EDEBEB",
+        fontSize: 18
+    }
 })

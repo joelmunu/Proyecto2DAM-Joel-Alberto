@@ -1,13 +1,14 @@
-import { StyleSheet, Text, View, ImageBackground, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, Pressable, KeyboardAvoidingView } from 'react-native';
 
-import YellowButton from './common/YellowButton';
+
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ setFirstLogin }) {
     const [formData, setFormData] = useState({
         "username": "",
         "fullname": "",
@@ -20,6 +21,8 @@ export default function RegisterScreen() {
         "pr_benchPress": 0,
         "pr_deadLift": 0
     })
+    const [error, setError] = useState(false)
+    const [errorText, setErrorText] = useState("")
 
     const handleInputChange = (fieldName, value) => {
         setFormData(prevState => ({
@@ -48,9 +51,10 @@ export default function RegisterScreen() {
             formData.gender === '' ||
             formData.password === ''
         ) {
-            alert('All fields are required')
+            setError(true)
+            setErrorText('All fields are required')
         } else {
-            const url = 'http://192.168.0.27:8080/registeruser'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
+            const url = 'http://192.168.0.20:8080/registeruser'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
             fetch(url, {
                 method: 'POST',
@@ -61,9 +65,12 @@ export default function RegisterScreen() {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Se ha registrado")
+                        setFirstLogin(false)
+                        
                         return response.json();
                     } else {
+                        setError(true)
+                        setErrorText('The username is taken')
                         throw new Error('Error en la solicitud');
                     }
                 })
@@ -71,80 +78,96 @@ export default function RegisterScreen() {
     };
 
     return (
-        <ImageBackground source={require('../assets/login.jpg')} resizeMode="cover" style={styles.image}>
-            <View style={styles.registerContainer}>
-                <View style={styles.registerForm}>
-                    <View style={styles.option}>
-                        <Text style={styles.text}>Username</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={formData.username}
-                            onChangeText={value => handleInputChange('username', value)}
-                        />
-                    </View>
-                    <View style={styles.option}>
-                        <Text style={styles.text}>Full name</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={formData.fullname}
-                            onChangeText={value => handleInputChange('fullname', value)}
-                        />
-                    </View>
-                    <View style={styles.optionSmallContainer}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+        >
+            <ImageBackground source={require('../assets/login.jpg')} resizeMode="cover" style={styles.image}>
+                <View style={styles.registerContainer}>
+                    <View style={styles.registerForm}>
                         <View style={styles.option}>
-                            <Text style={styles.textSmall}>Height</Text>
+                            <Text style={styles.text}>Username</Text>
                             <TextInput
-                                style={styles.inputSmall}
-                                keyboardType="decimal-pad"
-                                value={formData.height}
-                                onChangeText={value => handleInputChange('height', value)}
+                                style={styles.input}
+                                value={formData.username}
+                                onChangeText={value => handleInputChange('username', value)}
                             />
                         </View>
                         <View style={styles.option}>
-                            <Text style={styles.textSmall}>Weight</Text>
+                            <Text style={styles.text}>Full name</Text>
                             <TextInput
-                                style={styles.inputSmall}
-                                keyboardType="decimal-pad"
-                                value={formData.weight}
-                                onChangeText={value => handleInputChange('weight', value)}
+                                style={styles.input}
+                                value={formData.fullname}
+                                onChangeText={value => handleInputChange('fullname', value)}
                             />
                         </View>
-                    </View>
-                    <View style={styles.optionSmallContainer}>
+                        <View style={styles.optionSmallContainer}>
+                            <View style={styles.option}>
+                                <Text style={styles.textSmall}>Height</Text>
+                                <TextInput
+                                    style={styles.inputSmall}
+                                    keyboardType="decimal-pad"
+                                    value={formData.height}
+                                    onChangeText={value => handleInputChange('height', value)}
+                                />
+                            </View>
+                            <View style={styles.option}>
+                                <Text style={styles.textSmall}>Weight</Text>
+                                <TextInput
+                                    style={styles.inputSmall}
+                                    keyboardType="decimal-pad"
+                                    value={formData.weight}
+                                    onChangeText={value => handleInputChange('weight', value)}
+                                />
+                            </View>
+                        </View>
+                        <View style={styles.optionSmallContainer}>
+                            <View style={styles.option}>
+                                <Text style={styles.textSmall}>Age</Text>
+                                <TextInput
+                                    style={styles.inputSmall}
+                                    keyboardType="numeric"
+                                    value={formData.age}
+                                    onChangeText={value => handleInputChange('age', value)}
+                                />
+                            </View>
+                            <View style={styles.option}>
+                                <Text style={styles.textSmall}>Gender</Text>
+                                <View style={styles.pickerStyle}>
+                                    <Picker style={styles.picker}
+                                        selectedValue={formData.gender}
+                                        onValueChange={handlePickerChange}
+                                    >
+                                        <Picker.Item label="Male" value="Male" />
+                                        <Picker.Item label="Female" value="Female" />
+                                    </Picker>
+                                </View>
+                            </View>
+                        </View>
                         <View style={styles.option}>
-                            <Text style={styles.textSmall}>Age</Text>
+                            <Text style={styles.text}>Password</Text>
                             <TextInput
-                                style={styles.inputSmall}
-                                keyboardType="numeric"
-                                value={formData.age}
-                                onChangeText={value => handleInputChange('age', value)}
+                                style={styles.input}
+                                value={formData.password}
+                                onChangeText={value => handleInputChange('password', value)}
                             />
                         </View>
-                        <View style={styles.option}>
-                            <Text style={styles.textSmall}>Gender</Text>
-                            <Picker style={styles.picker}
-                                selectedValue={formData.gender}
-                                onValueChange={handlePickerChange}>
-                                <Picker.Item label="Male" value="Male" />
-                                <Picker.Item label="Female" value="Female" />
-                            </Picker>
+                        <View style={styles.centerButton}>
+                            <View style={styles.centerButton}>
+                                <Pressable style={styles.button} onPress={register}>
+                                    <Text style={styles.textButton}>Log in</Text>
+                                </Pressable>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.option}>
-                        <Text style={styles.text}>Password</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={formData.password}
-                            onChangeText={value => handleInputChange('password', value)}
-                        />
-                    </View>
-                    <View style={styles.centerButton}>
-                        <Button title='Register' style={styles.button} onPress={register}>
-                        </Button>
+                        {error && (
+                            <View style={styles.error}>
+                                <Text style={styles.errorText}>{errorText}</Text>
+                            </View>
+                        )}
                     </View>
                 </View>
-            </View>
-        </ImageBackground>
+            </ImageBackground>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -159,7 +182,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(212, 212, 212, 0.6)',
         width: "90%",
         height: "80%",
-        margin: 20,
+        marginLeft: 20,
+        marginRight: 20,
         borderRadius: 20,
         borderWidth: 2,
         borderColor: "#39393B",
@@ -193,12 +217,12 @@ const styles = StyleSheet.create({
 
     },
     option: {
-        marginBottom: 30
+        marginBottom: 10
     },
     registerForm: {
-        padding: 40,
+        padding: 20,
         height: "100%",
-        justifyContent: "center"
+
     },
     optionSmallContainer: {
         flexDirection: "row",
@@ -207,13 +231,18 @@ const styles = StyleSheet.create({
     centerButton: {
         alignItems: "center"
     },
-    picker: {
+    // picker: {
+    //     backgroundColor: "#EDEBEB",
+    //     width: 150,
+
+    // },
+    pickerStyle: {
         backgroundColor: "#EDEBEB",
-        padding: 5,
         borderRadius: 10,
         borderColor: "#39393B",
         borderWidth: 2,
         width: 150,
+
     },
     button: {
         backgroundColor: "#FF8000",
@@ -226,6 +255,18 @@ const styles = StyleSheet.create({
     textButton: {
         color: "#EDEBEB",
         fontWeight: "bold",
+        fontSize: 18
+    },
+    error: {
+        alignItems: "center",
+        marginTop: 20,
+        backgroundColor: "#FF4A41",
+        padding: 20,
+        borderRadius: 20
+
+    },
+    errorText: {
+        color: "#EDEBEB",
         fontSize: 18
     }
 })
