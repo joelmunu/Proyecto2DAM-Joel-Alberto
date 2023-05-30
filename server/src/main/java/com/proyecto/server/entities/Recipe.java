@@ -18,15 +18,19 @@ public class Recipe {
     @Column(length = 50)
     private String name;
 
-    @Column(length = 50)
-    private String video_id;
+    @Column
+    private String description;
+
+    @Column
+    private String ingredients;
 
     public Recipe() {
     }
 
-    public Recipe(String name, String video_id) {
+    public Recipe(String name, String description, String ingredients) {
         this.name = name;
-        this.video_id = video_id;
+        this.description = description;
+        this.ingredients = ingredients;
     }
 
     public int getRecipe_id() {
@@ -45,16 +49,25 @@ public class Recipe {
         this.name = name;
     }
 
-    public String getVideo_id() {
-        return video_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVideo_id(String video_id) {
-        this.video_id = video_id;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override
     public String toString() {
-        return "Recipe [recipe_id=" + recipe_id + ", name=" + name + ", video_id=" + video_id + "]";
+        return "Recipe [recipe_id=" + recipe_id + ", name=" + name + ", description=" + description + ", ingredients="
+                + ingredients + "]";
     }
 }
