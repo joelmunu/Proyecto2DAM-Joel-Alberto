@@ -55,4 +55,8 @@ public class RoutineService {
     public Routine findRoutineByName(String title) {
         return routineRepository.findRoutineByName(title);
     }
+
+    public int deleteRoutineById(int id) {
+        return routineRepository.deleteRoutineById(id);
+    }
 }
