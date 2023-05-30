@@ -14,8 +14,8 @@ public class ExerciseService {
     @Autowired
     ExerciseRepository exerciseRepository;
 
-    public void save(Exercise exercise) {
-        exerciseRepository.save(exercise);
+    public Exercise save(Exercise exercise) {
+        return exerciseRepository.save(exercise);
     }
 
     public Set<Exercise> getExercises() {

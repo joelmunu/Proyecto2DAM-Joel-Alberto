@@ -40,8 +40,8 @@ public class Routine {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "routines")
-    private Set<UserPlan> userPlans = new HashSet<>();
+    // @ManyToMany(mappedBy = "routines")
+    // private Set<UserPlan> userPlans = new HashSet<>();
 
     public Routine() {
     }
@@ -99,13 +99,13 @@ public class Routine {
         this.user = user;
     }
     
-    public Set<UserPlan> getUserPlans() {
-        return userPlans;
-    }
+    // public Set<UserPlan> getUserPlans() {
+    //     return userPlans;
+    // }
 
-    public void setUserPlans(Set<UserPlan> userPlans) {
-        this.userPlans = userPlans;
-    }
+    // public void setUserPlans(Set<UserPlan> userPlans) {
+    //     this.userPlans = userPlans;
+    // }
 
     @Override
     public String toString() {
