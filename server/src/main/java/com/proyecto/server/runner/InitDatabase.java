@@ -60,7 +60,7 @@ public class InitDatabase implements CommandLineRunner{
         exercises.add(curlBiceps);
         exercises.add(benchPress);
         bicepsTriceps.setExercises(exercises);
-
+        bicepsTriceps.setUser(user);
         routineService.save(bicepsTriceps);
 
         exercises.clear();
