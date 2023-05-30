@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,5 +32,20 @@ public class RecipeController {
     public ResponseEntity<Recipe> addRecipe(@RequestBody CreateRecipeRequest request) {
         Recipe recipe = recipeService.addRecipe(request.getName(), request.getDescription(), request.getIngredients(), request.getId());
         return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleterecipe/{id}")
+    public ResponseEntity<String> deleteRecipeById(@PathVariable int id) {
+        int succesfull = recipeService.deleteRecipeById(id);
+
+        String result = "";
+
+        if (succesfull == 1) {
+            result = "The recipe with id " + id + " was successfully deleted";
+        } else {
+            result = "The recipe with id " + id + " can't be deleted";
+        }
+
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 }

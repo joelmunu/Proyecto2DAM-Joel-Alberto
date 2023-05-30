@@ -38,4 +38,8 @@ public class RecipeService {
     public Recipe findRecipeByName(String name) {
         return recipeRepository.findRecipeByName(name);
     }
+
+    public int deleteRecipeById(int id) {
+        return recipeRepository.deleteRecipeById(id);
+    }
 }
