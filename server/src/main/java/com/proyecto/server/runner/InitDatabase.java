@@ -39,7 +39,7 @@ public class InitDatabase implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("Goyo", "Poyo", 1.70f, 89.0f, 45, "male", "1234", 122, 122, 122);
+        User user = new User("Goyo", "Poyo", 1.70f, 89.0f, 45, "male", "$10$Wbpe2Dtc8xKz2jPkgdJdSelRuBL51mkJdm.zLV29O96W/7sWs/z.6", 122, 122, 122);
         userService.save(user);
 
         Routine bicepsTriceps = new Routine("Biceps and Triceps", "Upper body");

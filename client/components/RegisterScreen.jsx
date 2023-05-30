@@ -68,7 +68,7 @@ export default function RegisterScreen({ setFirstLogin }) {
 
     const saveUserToken = async (value) => {
         await SecureStorage.setItemAsync('username', value);
-      }
+    }
 
       const register = () => {
         saveUserToken(formData.username).then(() => {

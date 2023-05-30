@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ImageBackground, TextInput, Pressable } from 'r
 
 import YellowButton from './common/YellowButton';
 import { useState } from 'react';
+import * as SecureStorage from 'expo-secure-store';
 
 
 export default function LoginScreen({ setFirstLogin }) {
@@ -21,6 +22,10 @@ export default function LoginScreen({ setFirstLogin }) {
         console.log(formData)
     };
 
+    const saveUserToken = async (value) => {
+        await SecureStorage.setItemAsync('username', value);
+    }
+
     const login = () => {
         if (
             formData.username === '' ||
@@ -29,6 +34,11 @@ export default function LoginScreen({ setFirstLogin }) {
             setError(true)
             setErrorText('All fields are required')
         } else {
+            saveUserToken(formData.username).then(() => {
+                console.log('Datos guardados correctamente.');
+            }).catch(error => {
+                console.log('Error al guardar los datos:', error);
+            });
             const url = 'http://192.168.0.17:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
             fetch(url, {
