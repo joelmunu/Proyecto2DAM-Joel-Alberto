@@ -29,7 +29,7 @@ export default function LoginScreen({ setFirstLogin }) {
             setError(true)
             setErrorText('All fields are required')
         } else {
-            const url = 'http://192.168.0.27:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
+            const url = 'http://192.168.0.17:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
             fetch(url, {
                 method: 'POST',

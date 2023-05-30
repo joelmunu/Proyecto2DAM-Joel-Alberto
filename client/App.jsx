@@ -21,7 +21,6 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [firstLogin, setFirstLogin] = useState(true)
-
   AsyncStorage.setItem('firstLogin', 'true')
 
   const verifyFirstLogin = async () => {

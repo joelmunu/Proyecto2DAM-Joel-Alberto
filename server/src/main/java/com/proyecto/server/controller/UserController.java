@@ -17,8 +17,7 @@ import com.proyecto.server.entities.DTO.UserLoginDTO;
 import com.proyecto.server.repository.UserRepository;
 import com.proyecto.server.services.UserService;
 
-
-
+import org.apache.coyote.Response;
 import org.mindrot.jbcrypt.*;
 
 @RestController
@@ -72,8 +71,18 @@ public class UserController {
     }
 
     @GetMapping("/checkusername/{username}")
-    public ResponseEntity<Integer> checkUsername(@PathVariable String username) {
+    public ResponseEntity<Boolean> checkUsername(@PathVariable String username) {
         Integer usernameCount = userService.checkUsername(username);
-        return new ResponseEntity<>(usernameCount, HttpStatus.OK);
+
+        if(usernameCount > 0) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false, HttpStatus.OK);
+    }
+
+    @GetMapping("/getUserByUsername/{username}")
+    public ResponseEntity<User> getuserByUsername(@PathVariable String username) {
+        User user = userService.findUserByUserName(username);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }

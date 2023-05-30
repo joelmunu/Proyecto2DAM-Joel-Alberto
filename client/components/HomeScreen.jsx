@@ -1,7 +1,34 @@
 import { StyleSheet, Text, View, ImageBackground, Pressable, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
-
+import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useEffect } from 'react';
 export default function HomeScreen() {
+
+
+    async function getValueFor(key) {
+        let result = await SecureStore.getItemAsync(key);
+        if (result) {
+          alert("🔐 Here's your value 🔐 \n" + result);
+        } else {
+          alert('No values stored under that key.');
+        }
+      }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getValueFor('username');
+                console.log(data)
+            } catch (error) {
+                console.log('Error al recuperar los datos en otro componente:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (
         <ScrollView>
             <View style={styles.screenContainer}>

@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, ImageBackground, TextInput, Pressable, KeyboardAvoidingView } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import * as SecureStorage from 'expo-secure-store';
+
 
 
 
@@ -23,7 +24,8 @@ export default function RegisterScreen({ setFirstLogin }) {
     })
     const [error, setError] = useState(false)
     const [errorText, setErrorText] = useState("")
-
+    const [user, setUser] = useState(false)
+    const navigation = useNavigation();
     const handleInputChange = (fieldName, value) => {
         setFormData(prevState => ({
             ...prevState,
@@ -40,8 +42,40 @@ export default function RegisterScreen({ setFirstLogin }) {
         console.log(formData)
     };
 
+    const checkUsername = async () => {
+        const url = `http://192.168.0.17:8080/checkusername/${formData.username}`;
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    setUser(true);
+                    return true;
+                } else {
+                    setUser(false);
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error('Error en la solicitud:', error);
+                return false;
+            });
+    }
 
-    const register = () => {
+    const saveUserToken = async (value) => {
+        await SecureStorage.setItemAsync('username', value);
+      }
+
+      const register = () => {
+        saveUserToken(formData.username).then(() => {
+            console.log('Datos guardados correctamente.');
+        }).catch(error => {
+            console.log('Error al guardar los datos:', error);
+        });
         if (
             formData.username === '' ||
             formData.fullname === '' ||
@@ -51,32 +85,40 @@ export default function RegisterScreen({ setFirstLogin }) {
             formData.gender === '' ||
             formData.password === ''
         ) {
-            setError(true)
-            setErrorText('All fields are required')
+            setError(true);
+            setErrorText('All fields are required');
         } else {
-            const url = 'http://192.168.0.20:8080/registeruser'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
-            console.log(JSON.stringify(formData))
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        setFirstLogin(false)
-                        
-                        return response.json();
-                    } else {
-                        setError(true)
-                        setErrorText('The username is taken')
-                        throw new Error('Error en la solicitud');
-                    }
-                })
+            checkUsername().then(usernameExists => {
+                if (usernameExists) {
+                    setError(true);
+                    setErrorText('The username is taken');
+                } else {
+                    const url = 'http://192.168.0.17:8080/registeruser';
+                    console.log(JSON.stringify(formData));
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                
+                                
+                                setFirstLogin(false);
+
+                            } else {
+                                throw new Error('Error en la solicitud');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error en la solicitud:', error);
+                        });
+                }
+            });
         }
     };
-
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
