@@ -39,51 +39,47 @@ public class InitDatabase implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("Goyo", "Poyo", 1.70f, 89.0f, 45, "male", "$10$Wbpe2Dtc8xKz2jPkgdJdSelRuBL51mkJdm.zLV29O96W/7sWs/z.6", 122, 122, 122);
-        userService.save(user);
+        // User user = new User("Goyo", "Poyo", 1.70f, 89.0f, 45, "male", "$10$Wbpe2Dtc8xKz2jPkgdJdSelRuBL51mkJdm.zLV29O96W/7sWs/z.6", 122, 122, 122);
+        // userService.save(user);
 
-        Routine bicepsTriceps = new Routine("Biceps and Triceps", "Upper body");
-        Routine legDay = new Routine("Leg Day", "Legs");
-        //Routine cardio = new Routine("Cardio", "Cardio");
+        // Routine bicepsTriceps = new Routine("Biceps and Triceps", "Upper body");
+        // Routine legDay = new Routine("Leg Day", "Legs");
+        // //Routine cardio = new Routine("Cardio", "Cardio");
 
-        Exercise curlBiceps = new Exercise("Curl Biceps", "Curl biceps description");
-        Exercise benchPress = new Exercise("Bench press", "Bench press description");
-        Exercise backSquat = new Exercise("Back Squat", "Back Squat description");
-        Exercise airBike = new Exercise("Air Bike 25 cal", "Air Bike 25 cal");
+        // Exercise curlBiceps = new Exercise("Curl Biceps", "Curl biceps description");
+        // Exercise benchPress = new Exercise("Bench press", "Bench press description");
+        // Exercise backSquat = new Exercise("Back Squat", "Back Squat description");
+        // Exercise airBike = new Exercise("Air Bike 25 cal", "Air Bike 25 cal");
         //Exercise run = new Exercise("500m run", "500m run");
 
-        Recipe bananaSmoothie = new Recipe("Banana Smoothie", "Banana smoothie recipe", "1 Banana, 1/2 orange, 300ml milk");
+        // Recipe bananaSmoothie = new Recipe("Banana Smoothie", "Banana smoothie recipe", "1 Banana, 1/2 orange, 300ml milk");
 
-        UserPlan plan1 = new UserPlan("Plan 1");
+        // UserPlan plan1 = new UserPlan("Plan 1");
 
-        Set<Exercise> exercises = new HashSet<>();
-        exercises.add(curlBiceps);
-        exercises.add(benchPress);
-        bicepsTriceps.setExercises(exercises);
-        bicepsTriceps.setUser(user);
-        routineService.save(bicepsTriceps);
+        // Set<Exercise> exercises = new HashSet<>();
+        // exercises.add(curlBiceps);
+        // exercises.add(benchPress);
+        // bicepsTriceps.setExercises(exercises);
+        // routineService.save(bicepsTriceps);
 
-        exercises.clear();
-        exercises.add(backSquat);
-        exercises.add(airBike);
-        legDay.setExercises(exercises);
+        // exercises.clear();
+        // exercises.add(backSquat);
+        // exercises.add(airBike);
+        // legDay.setExercises(exercises);
 
-        legDay.setUser(user);
 
-        routineService.save(legDay);
+        // routineService.save(legDay);
         
-        bananaSmoothie.setUser(user);
-        recipeService.save(bananaSmoothie);
+        // recipeService.save(bananaSmoothie);
 
-        Set<Recipe> recipes = new HashSet<>();
-        recipes.add(bananaSmoothie);
+        // Set<Recipe> recipes = new HashSet<>();
+        // recipes.add(bananaSmoothie);
 
-        Set<Routine> routines = new HashSet<>();
-        routines.add(legDay);
+        // Set<Routine> routines = new HashSet<>();
+        // routines.add(legDay);
 
-        plan1.setRecipes(recipes);
-        plan1.setRoutines(routines);
-        plan1.setUser(user);
-        userPlanService.save(plan1);
+        // plan1.setRecipes(recipes);
+        // plan1.setRoutines(routines);
+        // userPlanService.save(plan1);
     }
 }

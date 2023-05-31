@@ -32,17 +32,12 @@ public class RoutineService {
         return routineRepository.getRoutines();
     }
 
-    public Routine addRoutine(String title, String routine_type, List<String> exercise, int id) {
+    public Routine addRoutine(String title, String routine_type,  int id) {
         try {
-            Set<Exercise> exercises = new HashSet<>();
-
-            for (int index = 0; index < exercise.size(); index++) {
-                exercises.add(exerciseService.findExerciseByName(exercise.get(index)));
-            }
+            
 
             Routine routine = new Routine(title, routine_type);
 
-            routine.setExercises(exercises);
             routine.setUser(userRepository.findUserById(id));
             routineRepository.save(routine);
             return routine;
@@ -58,5 +53,9 @@ public class RoutineService {
 
     public int deleteRoutineById(int id) {
         return routineRepository.deleteRoutineById(id);
+    }
+
+    public Set<Routine> getRoutinesUser(int id) {
+        return routineRepository.getRoutinesUser(id);
     }
 }

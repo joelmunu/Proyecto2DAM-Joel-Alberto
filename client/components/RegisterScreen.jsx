@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStorage from 'expo-secure-store';
 
 
@@ -93,7 +92,7 @@ export default function RegisterScreen({ setFirstLogin }) {
                     setError(true);
                     setErrorText('The username is taken');
                 } else {
-                    const url = 'http://192.168.0.17:8080/registeruser';
+                    const url = 'http://192.168.0.27:8080/registeruser';
                     console.log(JSON.stringify(formData));
                     fetch(url, {
                         method: 'POST',

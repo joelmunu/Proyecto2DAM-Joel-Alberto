@@ -1,7 +1,60 @@
 import { StyleSheet, Text, View, ImageBackground, Image, Dimensions } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
+import { useEffect, useState } from 'react';
 
 
 export default function ProfileScreen() {
+    const [username, setUsername] = useState("")
+    const [user, setUser] = useState()
+
+    async function getValueFor(key) {
+        let result = await SecureStore.getItemAsync(key);
+        if (result) {
+            setUsername(result);
+            console.log(result)
+        } else {
+            alert('No values stored under that key.');
+        }
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await getValueFor('username');
+            } catch (error) {
+                console.log('Error al recuperar los datos en otro componente:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const getUser = async () => {
+            if (username) {
+                const url = `http://192.168.0.27:8080/getUserByUsername/${username}`;
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        setUser(data);
+                        console.log(data)
+                    } else {
+                        console.log('Error en la solicitud');
+                    }
+                } catch (error) {
+                    console.error('Error en la solicitud:', error);
+                }
+            }
+        };
+
+        getUser();
+    }, [username]);
     return (
         <View style={styles.container}>
             <View style={styles.images}>
@@ -9,31 +62,31 @@ export default function ProfileScreen() {
                 <Image source={require('../assets/profileImg.jpg')} style={styles.imageProfile} />
             </View>
             <View>
-                <Text style={styles.username}>Albertitoogg</Text>
+            {user && user.username && <Text style={styles.username}>{user.username}</Text>}
             </View>
             <View>
-                <Text style={styles.name}>Alberto Valido Fuentes</Text>
+            {user && user.fullname && <Text style={styles.name}>{user.fullname}</Text>}
             </View>
             <View style={styles.dataContainer}>
                 <View style={styles.data}>
                     <Text style={styles.dataTitle}>Height</Text>
-                    <Text style={styles.dataContent}>1,98 m</Text>
+                    {user && user.height && <Text style={styles.dataContent}>{user.height}</Text>}
                 </View>
                 <View style={styles.data}>
                     <Text style={styles.dataTitle}>Weight</Text>
-                    <Text style={styles.dataContent}>88 Kg</Text>
+                    {user && user.weight && <Text style={styles.dataContent}>{user.weight}</Text>}
                 </View>
                 <View style={styles.data}>
-                    <Text style={styles.dataTitle}>Age</Text>
-                    <Text style={styles.dataContent}>44</Text>
+                    <Text style={styles.dataTitle}>PR Dead Lift</Text>
+                    {user && user.age && <Text style={styles.dataContent}>{user.pr_deadLift}</Text>}
                 </View>
                 <View style={styles.data}>
                     <Text style={styles.dataTitle}>PR Back Squat</Text>
-                    <Text style={styles.dataContent}>120 Kg</Text>
+                    {user && user.age && <Text style={styles.dataContent}>{user.pr_backSquat}</Text>}
                 </View>
                 <View style={styles.dataLast}>
-                    <Text style={styles.dataTitle}>PR Benck Press</Text>
-                    <Text style={styles.dataContent}>100 Kg</Text>
+                    <Text style={styles.dataTitle}>PR Bench Press</Text>
+                    {user && user.age && <Text style={styles.dataContent}>{user.pr_benchPress}</Text>}
                 </View>
             </View>
         </View>

@@ -15,13 +15,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import CreateRutine from './components/CreateRutine';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
   const [firstLogin, setFirstLogin] = useState(true)
-  AsyncStorage.setItem('firstLogin', 'true')
+
 
   const verifyFirstLogin = async () => {
     try {
@@ -45,8 +46,17 @@ export default function App() {
     verify()
   }, [])
 
+  function Rutines() {
+    return (
+        <Stack.Navigator initialRouteName='Rutines'>
+          <Stack.Screen name="Rutines" component={RecipesScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="CreateRutine" component={CreateRutine} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    );
+  }
+
   return (
-    <View style={{height: "100%" }}>
+    <View style={{ height: "100%" }}>
       <NavigationContainer >
         {firstLogin ? (
           <Stack.Navigator initialRouteName='Welcome'>
@@ -73,7 +83,8 @@ export default function App() {
             />
           </Stack.Navigator>
         ) :
-          <Tab.Navigator screenOptions={({ route }) => ({
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
             tabBarStyle: { backgroundColor: '#D4D4D4', borderRadius: 20, margin: 20, },
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;

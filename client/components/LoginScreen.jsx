@@ -39,7 +39,7 @@ export default function LoginScreen({ setFirstLogin }) {
             }).catch(error => {
                 console.log('Error al guardar los datos:', error);
             });
-            const url = 'http://192.168.0.17:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
+            const url = 'http://192.168.0.27:8080/login'; // Reemplaza con la dirección IP y puerto correctos de tu servidor
             console.log(JSON.stringify(formData))
             fetch(url, {
                 method: 'POST',

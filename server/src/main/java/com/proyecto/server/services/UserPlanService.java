@@ -54,4 +54,8 @@ public class UserPlanService {
 
         return userPlan;
     }
+
+    public Set<UserPlan> getPlansUser(int id) {
+        return userPlanRepository.getPlansUser(id);
+    }
 }

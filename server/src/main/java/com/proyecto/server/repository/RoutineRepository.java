@@ -21,4 +21,7 @@ public interface RoutineRepository extends JpaRepository <Routine, Integer>{
     @Modifying
     @Query(value = "DELETE FROM routine WHERE routine_id = ?", nativeQuery = true)
     int deleteRoutineById(int id);
+
+    @Query(value = "SELECT * FROM fitnessapp.routine where user_id = ?", nativeQuery = true)
+    Set<Routine> getRoutinesUser(int id);
 }

@@ -28,11 +28,17 @@ public class RoutineController {
         return new ResponseEntity<Set<Routine>>(routines, HttpStatus.OK);
     }
 
+    @GetMapping("/routines/{id}")
+    public ResponseEntity<Set<Routine>> getRoutinesUser(@PathVariable int id) {
+        Set<Routine> routines = routineService.getRoutinesUser(id);
+        return new ResponseEntity<Set<Routine>>(routines, HttpStatus.OK);
+    }
+
     @PostMapping("/addroutine")
     public ResponseEntity<?> addRoutine(@RequestBody CreateRoutineRequest request) {
         System.out.println(request.getTitle());
         try {
-            Routine newRoutine = routineService.addRoutine(request.getTitle(), request.getRoutine_type(), request.getExercise(), request.getId());
+            Routine newRoutine = routineService.addRoutine(request.getTitle(), request.getRoutine_type(),  request.getId());
         return new ResponseEntity<Routine>(newRoutine, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
